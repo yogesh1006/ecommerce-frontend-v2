@@ -1,0 +1,9 @@
+.link{
+ color:white;
+ padding-right:10px;
+}
+
+.active{
+    color:white;
+    font-weight: bolder;
+}
