@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "../../backend";
 import { toast } from "react-toastify";
