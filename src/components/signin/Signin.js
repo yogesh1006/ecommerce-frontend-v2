@@ -4,6 +4,7 @@ import { Form, Button, Container, Col } from "react-bootstrap";
 import axios from "axios";
 import {  toast } from 'react-toastify';
 import Loader from '../Loader'
+import { API } from "../../backend";
 
 const Signin = (props) => {
   const [values, setValues] = useState({
@@ -20,7 +21,7 @@ const Signin = (props) => {
     e.preventDefault();
     setValues({ ...values });
 
-    axios.post("http://13.235.242.157:3000/auth/login",values).then((response) => {
+    axios.post(`${API}/auth/login`,values).then((response) => {
       let data= response.data.data
 
       if(data.token){
