@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Container, Col } from "react-bootstrap";
 import axios from "axios";
-import {  toast } from 'react-toastify';
-import Loader from '../Loader'
+import { toast } from "react-toastify";
+import Loader from "../Loader";
 import { API } from "../../backend";
 
 const Signin = (props) => {
@@ -11,7 +11,6 @@ const Signin = (props) => {
     email: "",
     password: "",
   });
-
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -21,31 +20,30 @@ const Signin = (props) => {
     e.preventDefault();
     setValues({ ...values });
 
-    axios.post(`${API}/auth/login`,values).then((response) => {
-      let data= response.data.data
+    axios
+      .post(`${API}/auth/login`, values)
+      .then((response) => {
+        let data = response.data.data;
 
-      if(data.token){
-
-        localStorage.setItem("jwt",data.token)
-      }
-      toast.success(response.data.message, {
-        position: toast.POSITION.TOP_RIGHT
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+        }
+        toast.success(response.data.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setValues({
+          email: "",
+          password: "",
+        });
+        <Loader />;
+        props.history.push("/ushopweship");
+      })
+      .catch((err) => {
+        console.log(err.response);
+        toast.error(err.response.data.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       });
-      setValues({
-        email: "",
-        password: "",
-      });
-       <Loader/>
-      props.history.push("/ushopweship");
-  
-    }).catch(err =>{
-      console.log(err.response);
-      toast.error(err.response.data.message, {
-        position: toast.POSITION.TOP_RIGHT
-      });
-    });
-   
-
   };
 
   return (

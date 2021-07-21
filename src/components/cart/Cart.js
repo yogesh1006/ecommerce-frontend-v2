@@ -11,9 +11,15 @@ import {
 import { API } from "../../backend";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
+const history = useHistory();
+
+  const checkout = (product) => {
+     history.push("/ushopweship/checkout")
+  }
 
   const getCartData = () => {
     axios
@@ -83,7 +89,7 @@ const Cart = () => {
                   <Dropdown.Item as="button">2</Dropdown.Item>
                   <Dropdown.Item as="button">3</Dropdown.Item>
                 </DropdownButton>
-                  <Button variant="primary" block>BUY NOW</Button>
+                  <Button variant="primary" block onClick={() => checkout(product)}>BUY NOW</Button>
                   <Button
                     block
                     variant="secondary"

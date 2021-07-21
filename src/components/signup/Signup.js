@@ -1,8 +1,8 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Container } from "react-bootstrap";
-import {signup} from "./signupapicall/index"
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Signup = () => {
   const [values, setValues]=useState({
@@ -21,8 +21,9 @@ const Signup = () => {
    const onSubmit=e=>{
       e.preventDefault()
       setValues({...values})
-      signup(values)
+      axios.post(`${API}/auth/signup`,values)
       .then(res => {
+        console.log(res.data);
         toast.success(res.data.message, {
           position: toast.POSITION.TOP_RIGHT
         }

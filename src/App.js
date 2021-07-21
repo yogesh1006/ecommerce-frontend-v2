@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProductPage from "./components/products/ProductPage";
 import Wishlist from "./components/wishlist/Wishlist";
 import Banner from "./components/Banner/Banner";
+import Checkout from "./components/checkout/Checkout"
 
 function App() {
   return (
@@ -27,9 +28,11 @@ function App() {
 
           <PrivateRoute path="/ushopweship/cart" component={Cart} />
           <PrivateRoute path="/ushopweship/wishlist" component={Wishlist} />
+          <PrivateRoute path="/ushopweship/checkout" component={Checkout}/>
 
           <Route path="/ushopweship/login" component={Signin} />
           <Route path="/ushopweship/signup" component={Signup} />
+
         </Switch>
       </main>
       <Footer />
