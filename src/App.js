@@ -6,13 +6,13 @@ import Signin from "./components/signin/Signin";
 import Signup from "./components/signup/Signup";
 import PrivateRoute from "./PrivateRoute";
 import Cart from "./components/cart/Cart";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Products from "./components/products/Products";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductPage from "./components/products/ProductPage";
 import Wishlist from "./components/wishlist/Wishlist";
 import Banner from "./components/Banner/Banner";
-import Checkout from "./components/checkout/Checkout"
 
 function App() {
   return (
@@ -28,8 +28,7 @@ function App() {
 
           <PrivateRoute path="/ushopweship/cart" component={Cart} />
           <PrivateRoute path="/ushopweship/wishlist" component={Wishlist} />
-          <PrivateRoute path="/ushopweship/checkout" component={Checkout}/>
-
+\
           <Route path="/ushopweship/login" component={Signin} />
           <Route path="/ushopweship/signup" component={Signup} />
 

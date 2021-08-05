@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button, Container } from "react-bootstrap";
 import { toast } from "react-toastify";
-
 import axios from "axios";
 import { API } from "../../backend";
+import { useAuth } from "../../context/AuthContext";
 
 function ProductPage() {
   const { product_id } = useParams();
   const [product, setproduct] = useState({});
+  const { authState } = useAuth();
 
   useEffect(() => {
     axios
@@ -29,46 +30,22 @@ function ProductPage() {
         },
         {
           headers: {
-            authorization: localStorage.getItem("jwt"),
+            authorization: authState,
           },
         }
       )
       .then((res) => {
-        console.log(res);
         toast.success(res.data.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err.response.data.message, {
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.response.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
       });
   };
-
-  // async function addToCart(product, id) {
-  //   try {
-  //     const response = await fetch(`${API}/api/add_to_cart`, {
-  //       method: "POST",
-  //       product_id: id,
-  //       headers: {
-  //         "Content-type": "application/json; charset=UTF-8",
-  //         'Authorization': `Bearer ${token}`
-  //       },
-  //     });
-  //     let data = await response.json();
-  //     dispatch({ type: "ADD_TO_CART", payload: product });
-  //     toast.success("Item Added To Cart", {
-  //       position: toast.POSITION.TOP_RIGHT
-  //     });
-  //     // alert("Item Added To Cart");
-  //     console.log(data);
-  //   } catch (err) {
-  //     alert("Something Went Wrong");
-  //     console.log(err);
-  //   }
-  // }
 
   return (
     <div>
@@ -78,8 +55,8 @@ function ProductPage() {
       <Row>
         <Col sm={12} md={10} lg={12} xl={12}>
           <Container fluid>
-            <Row xl={6}>
-              <Col>
+            <Row md={4} lg={6} xl={12}>
+              <Col sm={12} md={6} lg={4}>
                 <Image src={product.image} alt={product.name} fluid />
               </Col>
               <Col>

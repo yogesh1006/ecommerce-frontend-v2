@@ -1,27 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Row, Col, Card, Container, Button } from "react-bootstrap";
 import axios from "axios";
 import { API } from "../../backend";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
+import { useData } from "../../context/dataContext";
+import { Link } from "react-router-dom";
 
 const Wishlist = () => {
-  const [wishlist, setWishlist] = useState([]);
+  const { authState } = useAuth();
+  const { state, dispatch } = useData();
 
   const getWishlistData = () => {
     axios
       .get(`${API}/api/get_user_wishlist`, {
         headers: {
-          authorization: localStorage.getItem("jwt"),
+          authorization: authState,
         },
       })
       .then((res) => {
-        setWishlist(res.data.data.products);
+        dispatch({
+          type: "SET_USER_WISHLIST",
+          payload: res.data.data.products,
+        });
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     getWishlistData();
+    // eslint-disable-next-line
   }, []);
 
   const removeFromWishlist = (id) => {
@@ -31,11 +39,12 @@ const Wishlist = () => {
         { product_id: id },
         {
           headers: {
-            authorization: localStorage.getItem("jwt"),
+            authorization: authState,
           },
         }
       )
       .then((res) => {
+        console.log(res);
         getWishlistData();
         toast.success(res.data.message, {
           position: toast.POSITION.TOP_RIGHT,
@@ -51,49 +60,69 @@ const Wishlist = () => {
         { product_id: id },
         {
           headers: {
-            authorization: localStorage.getItem("jwt"),
+            authorization: authState,
           },
         }
       )
       .then((res) => {
         removeFromWishlist(id);
-        setWishlist(res.data.data.products);
+        getWishlistData();
+        toast.success(res.data.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      });
   };
 
   return (
     <Container>
-      <Row>
-        <h4>My Wishlist ({wishlist.length})</h4>
+      <h4>My Wishlist ({state.wishlist.length})</h4>
+      {state.wishlist.length === 0 ? (
+        <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"300px"}}>
+          <h3>Your Wishlist is Empty!</h3> <br/>
+          <div style={{border:"1px solid black",padding:"3px",borderRadius:"3px",marginLeft:"1rem"}}>
+            <Link to="/ushopweship/home"> Continue Shopping</Link>
+         </div>
+        </div>
+      ) : (
+        <Row>
+          {state.wishlist.map((product, index) => (
+            <Col key={index} sm={12} md={4} lg={4} xl={3}>
+              <Card style={{ minWidth: "15rem", margin: "0.5rem" }}>
+                <Card.Img
+                  variant="bottom"
+                  src={product.image}
+                  style={{ width: "100%", maxWidth: "250px", height: "250px" }}
+                />
 
-        {wishlist.map((product, index) => (
-          <Col key={index} sm={12} md={4} lg={4} xl={3}>
-            <Card style={{ minWidth: "15rem", margin: "0.5rem" }}>
-              <Card.Img variant="bottom" src={product.image} />
-
-              <Card.Body>
-                <Card.Title>
-                  <strong>{product.name}</strong>
-                </Card.Title>
-                <Card.Text as="h5">Rs.{product.price}</Card.Text>
-              </Card.Body>
-              <Button
-                className="mb-2"
-                onClick={() => addToCartFromWishlist(product.product_id)}
-              >
-                Add to Cart
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => removeFromWishlist(product.product_id)}
-              >
-                Remove
-              </Button>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                <Card.Body>
+                  <Card.Title>
+                    <strong>{product.name}</strong>
+                  </Card.Title>
+                  <Card.Text as="h5">Rs.{product.price}</Card.Text>
+                </Card.Body>
+                <Button
+                  className="mb-2"
+                  onClick={() => addToCartFromWishlist(product.product_id)}
+                >
+                  Add to Cart
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => removeFromWishlist(product.product_id)}
+                >
+                  Remove
+                </Button>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </Container>
   );
 };

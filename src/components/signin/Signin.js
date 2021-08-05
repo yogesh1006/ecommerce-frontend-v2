@@ -1,19 +1,23 @@
 import { NavLink, useHistory } from "react-router-dom";
-// import { Form, Button, Container, Col } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Loader from "../Loader";
 import { API } from "../../backend";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import "./signin.css";
+import { useState } from "react";
+import Loader from "react-loader-spinner";
+
 
 const Signin = () => {
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "tester12@gmail.com",
+      password: "tester12",
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Required"),
@@ -22,23 +26,25 @@ const Signin = () => {
         .required("Required"),
     }),
     onSubmit: (values) => {
+      setLoading(true)
+
       axios
         .post(`${API}/auth/login`, values)
         .then((response) => {
           let data = response.data.data;
-
           if (data.token) {
-            localStorage.setItem("jwt", data.token);
+            localStorage.setItem("jwt", JSON.stringify(data.token));
           }
+
           toast.success(response.data.message, {
             position: toast.POSITION.TOP_RIGHT,
           });
-          <Loader />;
-          history.push("/ushopweship");
+          setLoading(false);
+          history.push("/ushopweship/home");
         })
         .catch((err) => {
-          console.log(err.response);
-          toast.error(err.response.data.message, {
+          console.log(err);
+          toast.error("Something went wrong!", {
             position: toast.POSITION.TOP_RIGHT,
           });
         });
@@ -46,6 +52,7 @@ const Signin = () => {
   });
 
   return (
+    <>
     <form onSubmit={formik.handleSubmit} className="login-page">
       <h3>WELCOME BACK</h3>
 
@@ -99,95 +106,15 @@ const Signin = () => {
         </p>
       </div>
     </form>
+    {loading && (
+        <div style={{textAlign:"center"}}>
+          <Loader type="TailSpin" color="#00BFFF" height={70} width={70} />
+        </div>
+      )}
+    </>
   );
 };
 
 export default Signin;
 
-// const Signin = (props) => {
-//   const [values, setValues] = useState({
-//     email: "",
-//     password: "",
-//   });
 
-//   const handleChange = (name) => (event) => {
-//     setValues({ ...values, [name]: event.target.value });
-//   };
-
-//   const onSubmit = (e) => {
-//     e.preventDefault();
-//     setValues({ ...values });
-
-//     axios
-//       .post(`${API}/auth/login`, values)
-//       .then((response) => {
-//         let data = response.data.data;
-
-//         if (data.token) {
-//           localStorage.setItem("jwt", data.token);
-//         }
-//         toast.success(response.data.message, {
-//           position: toast.POSITION.TOP_RIGHT,
-//         });
-//         setValues({
-//           email: "",
-//           password: "",
-//         });
-//         <Loader />;
-//         props.history.push("/ushopweship");
-//       })
-//       .catch((err) => {
-//         console.log(err.response);
-//         toast.error(err.response.data.message, {
-//           position: toast.POSITION.TOP_RIGHT,
-//         });
-//       });
-//   };
-
-//   return (
-//     <div>
-//       <Container>
-//         <Col>
-//           <Form>
-//             <Form.Text className="text-center">
-//               <h3>WELCOME BACK</h3>
-//             </Form.Text>
-//             <Form.Text className="text-center">
-//               <h3>Login to your account</h3>
-//             </Form.Text>
-//             <Form.Group controlId="formBasicEmail">
-//               <Form.Label>Email address</Form.Label>
-//               <Form.Control
-//                 size="sm"
-//                 name="email"
-//                 value={values.email}
-//                 type="email"
-//                 placeholder="Enter email"
-//                 onChange={handleChange("email")}
-//               />
-//             </Form.Group>
-
-//             <Form.Group controlId="formBasicPassword">
-//               <Form.Label>Password</Form.Label>
-//               <Form.Control
-//                 size="sm"
-//                 name="password"
-//                 value={values.password}
-//                 type="password"
-//                 placeholder="Password"
-//                 onChange={handleChange("password")}
-//               />
-//             </Form.Group>
-
-//             <Button variant="primary" type="submit" onClick={onSubmit}>
-//               Sign in
-//             </Button>
-//             <Form.Text as="small" className="text-muted my-2">
-//               Not registered yet? <Link to="/ushopweship/signup">Register</Link>
-//             </Form.Text>
-//           </Form>
-//         </Col>
-//       </Container>
-//     </div>
-//   );
-// };

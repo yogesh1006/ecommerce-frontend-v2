@@ -28,26 +28,25 @@ const Filter = () => {
       });
   };
 
-  const filterClear = () =>{
-    axios
-    .post(`${API}/auth/get_all_products`)
-    .then((res) => {
+  const filterClear = () => {
+    axios.post(`${API}/auth/get_all_products`).then((res) => {
       dispatch({ type: "SET_PRODUCTLIST", payload: res.data.data });
-    });  }
-    
+    });
+  };
+
   return (
     <div>
-      <fieldset>
         <legend>Sort By</legend>
-        <input type="radio" name="sort" onChange={filterClear} />
-        <label>Newest</label>
-        <input type="radio" name="sort" onChange={filteredDataHighToLow} />
-
-        <label>Price: High To Low</label>
-        {"   "}
-        <input type="radio" name="sort" onChange={filteredDataLowToHigh} />
-        <label>Price: Low To High</label>
-      </fieldset>
+        <div>
+          <input type="radio" name="sort" onChange={filterClear} />
+          <label> Newest</label>
+          <br />
+          <input type="radio" name="sort" onChange={filteredDataHighToLow} />
+          <label> Price: High To Low</label>
+          <br />
+          <input type="radio" name="sort" onChange={filteredDataLowToHigh} />
+          <label> Price: Low To High</label>
+        </div>
     </div>
   );
 };

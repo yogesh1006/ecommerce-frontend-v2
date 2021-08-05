@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import {reducerFunction} from "./reducerFunction"
+import { dataReducer } from "../reducer/dataReducer";
 
 export const DataContext = createContext();
 
@@ -10,10 +10,12 @@ export function useData() {
 const initialState = {
   products: [],
   cart: [],
-  wishlist:[],
+  wishlist: [],
 };
+
+console.log(initialState);
 export function DataProvider({ children }) {
-  const [state, dispatch ] = useReducer(reducerFunction, initialState);
+  const [state, dispatch] = useReducer(dataReducer, initialState);
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>
@@ -21,4 +23,3 @@ export function DataProvider({ children }) {
     </DataContext.Provider>
   );
 }
-

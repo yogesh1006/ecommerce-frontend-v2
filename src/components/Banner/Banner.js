@@ -1,29 +1,27 @@
 import React from "react";
-import { Button, Carousel, Figure } from "react-bootstrap";
+import { Button, Carousel, Figure ,Image} from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+
 const Banner = () => {
   return (
     <div className="text-center">
       <Carousel>
         <Carousel.Item>
-          <img
+          <Image
             className="d-block w-90 m-auto"
             src="https://cdn.static-zoutons.com/images/originals/blog/1_2_1607080286.png"
             alt="First slide"
+            fluid
           />
-          {/* <Carousel.Caption>
-            <h3>India Biggest Shoe Sale</h3>
-          </Carousel.Caption> */}
         </Carousel.Item>
         <Carousel.Item>
-          <img
+          <Image
             className="d-block w-90 m-auto"
             src="https://image.freepik.com/free-vector/sneakers-design-flyer-template_1262-20679.jpg"
             alt="Second slide"
+            fluid
           />
-          {/* <Carousel.Caption>
-            <h3>BUY latest shoes</h3>
-          </Carousel.Caption> */}
         </Carousel.Item>
       </Carousel>
       <h3 className="text-center mt-3">Featured Products</h3>
