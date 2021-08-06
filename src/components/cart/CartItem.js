@@ -21,7 +21,7 @@ const CartItem = ({ product, getCartData }) => {
         },
         {
           headers: {
-            authorization: authState,
+            'authorization': authState,
           },
         }
       )
@@ -41,7 +41,7 @@ const CartItem = ({ product, getCartData }) => {
   const addToWishlistFromCart = (product_id) => {
     axios
       .post(
-        `${API}/api/add_to_wishlist`,
+        `${API}/api/add_wishlist`,
         {
           product_id: product_id,
         },

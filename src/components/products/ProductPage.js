@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button, Container } from "react-bootstrap";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -10,6 +10,8 @@ function ProductPage() {
   const { product_id } = useParams();
   const [product, setproduct] = useState({});
   const { authState } = useAuth();
+  console.log(authState);
+  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -22,29 +24,33 @@ function ProductPage() {
   }, []);
 
   const addToCart = (product_id) => {
-    axios
-      .post(
-        `${API}/api/add_to_cart`,
-        {
-          product_id: product_id,
-        },
-        {
-          headers: {
-            authorization: authState,
+    if (authState) {
+      axios
+        .post(
+          `${API}/api/add_to_cart`,
+          {
+            product_id: product_id,
           },
-        }
-      )
-      .then((res) => {
-        toast.success(res.data.message, {
-          position: toast.POSITION.TOP_RIGHT,
+          {
+            headers: {
+              authorization: authState,
+            },
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(error.response.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
         });
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error(error.response.message, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      });
+    } else {
+      history.push("/ushopweship/login");
+    }
   };
 
   return (

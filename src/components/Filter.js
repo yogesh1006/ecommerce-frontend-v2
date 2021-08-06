@@ -35,7 +35,7 @@ const Filter = () => {
   };
 
   return (
-    <div>
+    <div style={{width:"15%"}}>
         <legend>Sort By</legend>
         <div>
           <input type="radio" name="sort" onChange={filterClear} />

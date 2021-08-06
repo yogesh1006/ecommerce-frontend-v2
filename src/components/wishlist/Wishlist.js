@@ -97,7 +97,7 @@ const Wishlist = () => {
                 <Card.Img
                   variant="bottom"
                   src={product.image}
-                  style={{ width: "100%", maxWidth: "250px", height: "250px" }}
+                  style={{ height: "250px" }}
                 />
 
                 <Card.Body>
@@ -116,7 +116,7 @@ const Wishlist = () => {
                   variant="secondary"
                   onClick={() => removeFromWishlist(product.product_id)}
                 >
-                  Remove
+                  Remove From Cart
                 </Button>
               </Card>
             </Col>
