@@ -13,11 +13,12 @@ const Cart = () => {
   const { authState } = useAuth();
   const { state, dispatch } = useData();
   console.log(state);
+  
   const getCartData = () => {
     axios
       .get(`${API}/api/get_user_cart`, {
         headers: {
-          authorization: authState,
+          authorization: authState.token,
         },
       })
       .then((res) => {

@@ -24,7 +24,7 @@ function ProductPage() {
   }, []);
 
   const addToCart = (product_id) => {
-    if (authState) {
+    if (authState.token) {
       axios
         .post(
           `${API}/api/add_to_cart`,
@@ -33,7 +33,7 @@ function ProductPage() {
           },
           {
             headers: {
-              authorization: authState,
+              authorization: authState.token,
             },
           }
         )

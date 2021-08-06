@@ -15,6 +15,8 @@ import Wishlist from "./components/wishlist/Wishlist";
 import Banner from "./components/Banner/Banner";
 
 function App() {
+ 
+
   return (
     <div className="App">
       <Header />

@@ -1,0 +1,11 @@
+.product-page{
+    display:flex;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .product-page{
+      flex-direction:column;
+    }
+  }

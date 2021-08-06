@@ -7,6 +7,7 @@ import Filter from "../Filter";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
+import "./products.css";
 
 const Products = () => {
   const { state, dispatch } = useData();
@@ -26,7 +27,8 @@ const Products = () => {
   }, []);
 
   const addToWishlist = (product_id) => {
-    if (authState) {
+    if (authState.token) {
+
       axios
         .post(
           `${API}/api/add_to_wishlist`,
@@ -35,7 +37,7 @@ const Products = () => {
           },
           {
             headers: {
-              authorization: authState,
+              authorization: authState.token,
             },
           }
         )
@@ -57,7 +59,7 @@ const Products = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div  className="product-page">
       <Filter />
       <div style={{ width: "80%" }}>
         <Row>

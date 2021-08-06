@@ -5,9 +5,11 @@ import { reducer } from "../reducer/authReducer";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const token = JSON.parse(localStorage.getItem("jwt"));
-
-  const [authState, authDispatch] = useReducer(reducer, token);
+  
+ let initialState={
+   token: JSON.parse(localStorage.getItem("jwt")) || ''
+ }
+  const [authState, authDispatch] = useReducer(reducer, initialState);
 
   console.log(authState);
 

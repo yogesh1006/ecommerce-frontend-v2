@@ -21,7 +21,7 @@ const CartItem = ({ product, getCartData }) => {
         },
         {
           headers: {
-            'authorization': authState,
+            'authorization': authState.token,
           },
         }
       )
@@ -47,7 +47,7 @@ const CartItem = ({ product, getCartData }) => {
         },
         {
           headers: {
-            'authorization': authState,
+            'authorization': authState.token,
           },
         }
       )

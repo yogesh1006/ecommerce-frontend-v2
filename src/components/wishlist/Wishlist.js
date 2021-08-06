@@ -15,7 +15,7 @@ const Wishlist = () => {
     axios
       .get(`${API}/api/get_user_wishlist`, {
         headers: {
-          authorization: authState,
+          authorization: authState.token,
         },
       })
       .then((res) => {
@@ -39,7 +39,7 @@ const Wishlist = () => {
         { product_id: id },
         {
           headers: {
-            authorization: authState,
+            authorization: authState.token,
           },
         }
       )
@@ -60,7 +60,7 @@ const Wishlist = () => {
         { product_id: id },
         {
           headers: {
-            authorization: authState,
+            authorization: authState.token,
           },
         }
       )

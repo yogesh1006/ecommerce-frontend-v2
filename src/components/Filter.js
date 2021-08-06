@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { API } from "../backend";
 import { useData } from "../context/dataContext";
+import "./filter.css";
 
 const Filter = () => {
   const { dispatch } = useData();
@@ -35,7 +36,7 @@ const Filter = () => {
   };
 
   return (
-    <div style={{width:"15%"}}>
+    <div  className="filters">
         <legend>Sort By</legend>
         <div>
           <input type="radio" name="sort" onChange={filterClear} />
