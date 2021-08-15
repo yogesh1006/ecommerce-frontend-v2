@@ -10,10 +10,9 @@ import { useAuth } from "../../context/AuthContext";
 import "./products.css";
 
 const Products = () => {
-  const { state, dispatch } = useData();
+  const { filteredData, dispatch } = useData();
   const { authState } = useAuth();
    const history = useHistory();
-   console.log(authState);
   useEffect(() => {
     axios
       .post(`${API}/auth/get_all_products`)
@@ -63,10 +62,10 @@ const Products = () => {
       <Filter />
       <div style={{ width: "80%" }}>
         <Row>
-          {state.products.map((product) => (
+          {filteredData.map((product) => (
             <Col key={product._id} sm={12} md={4} lg={3} xl={4}>
               <Card
-                style={{ margin: "0.5rem", width: "100%", height: "420px" }}
+                style={{ margin: "0.5rem", width: "100%", height: "470px" }}
               >
                 <Link to={`/ushopweship/product/${product._id}`}>
                   <Card.Img
@@ -83,9 +82,14 @@ const Products = () => {
                     alignItems: "stretch",
                   }}
                 >
-                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Title>{product.name}<span> <h6>{product.brand}</h6></span></Card.Title>
+                  <div style={{display:"flex",marginRight:"4px"}}>{product.size.map((size,index) => {
+                     return ( 
+                       <h5 key={index} style={{border:"1px solid black",padding:"4px",marginRight:"4px"}}>{size}</h5>
+                     )
+                  })}</div>
                   <Card.Text as="h5">Rs.{product.price}</Card.Text>
-                  <Button onClick={() => addToWishlist(product._id)} block>
+                  <Button style={{position:"relative",bottom:0}} onClick={() => addToWishlist(product._id)} block>
                     ADD TO WISHLIST
                   </Button>
                 </Card.Body>

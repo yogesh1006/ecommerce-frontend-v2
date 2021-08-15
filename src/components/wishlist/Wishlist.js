@@ -116,7 +116,7 @@ const Wishlist = () => {
                   variant="secondary"
                   onClick={() => removeFromWishlist(product.product_id)}
                 >
-                  Remove From Cart
+                  Remove From Wishlist
                 </Button>
               </Card>
             </Col>

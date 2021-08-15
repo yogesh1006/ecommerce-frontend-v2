@@ -1,3 +1,22 @@
+export const initialState = {
+  products: [],
+  cart: [],
+  wishlist: [],
+  filters: {
+    sortByBrand: [
+      "Reebok",
+    "Jack & Jones",
+    "Adidas",
+    "Levi's",
+    "Nike",
+    "Puma",
+    "Campus",
+    "Layasa"
+    ],
+    sortBySize: ["8", "9", "10"],
+  },
+};
+
 export function dataReducer(state, action) {
   switch (action.type) {
     case "SET_PRODUCTLIST":
@@ -48,6 +67,53 @@ export function dataReducer(state, action) {
             ? { ...item, qty: item.qty - 1 }
             : item;
         }),
+      };
+
+    case "SORT_BY_BRAND":
+      return state.filters.sortByBrand.includes(action.payload)
+        ? {
+            ...state,
+            filters: {
+              ...state.filters,
+              sortByBrand: state.filters.sortByBrand.filter(
+                (brand) => brand !== action.payload
+              ),
+            },
+          }
+        : {
+            ...state,
+            filters: {
+              ...state.filters,
+              sortByBrand: state.filters.sortByBrand.concat(action.payload),
+            },
+          };
+
+          case "SORT_BY_SIZES":
+            return state.filters.sortBySize.includes(action.payload)
+              ? {
+                  ...state,
+                  filters: {
+                    ...state.filters,
+                    sortBySize: state.filters.sortBySize.filter(
+                      (size) => size !== action.payload
+                    )
+                  }
+                }
+              : {
+                  ...state,
+                  filters: {
+                    ...state.filters,
+                    sortBySize: state.filters.sortBySize.concat(action.payload)
+                  }
+                };      
+
+    case "CLEAR_FILTERS":
+      return {
+        ...state,
+        filters: {
+          sortByBrand: [],
+          sortBySize: [],
+        },
       };
     default:
       return { state };

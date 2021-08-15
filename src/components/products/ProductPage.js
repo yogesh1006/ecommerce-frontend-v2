@@ -53,6 +53,39 @@ function ProductPage() {
     }
   };
 
+  const addToWishlist = (product_id) => {
+    if (authState.token) {
+
+      axios
+        .post(
+          `${API}/api/add_to_wishlist`,
+          {
+            product_id: product_id,
+          },
+          {
+            headers: {
+              authorization: authState.token,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          toast.success(res.data.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.response.data.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        });
+    } else {
+      history.push("/ushopweship/login")
+    }
+  };
+
+
   return (
     <div>
       <Link className="btn btn-dark my-3" to="/ushopweship/home">
@@ -68,7 +101,7 @@ function ProductPage() {
               <Col>
                 <ListGroup variant="flush">
                   <ListGroup.Item key={product._id}>
-                    <h3>{product.name}</h3>
+                    <h5>{product.name}</h5>
                   </ListGroup.Item>
 
                   <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
@@ -95,6 +128,9 @@ function ProductPage() {
                         OUT OF STOCK
                       </Button>
                     )}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Button block onClick={() => addToWishlist(product._id)}>Add To Wishlist</Button>
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
