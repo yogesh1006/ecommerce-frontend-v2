@@ -1,12 +1,10 @@
-.product-page{
-    display:flex;
+.product-page {
+  display: flex;
 }
 
-
-
 @media only screen and (max-width: 768px) {
-    .product-page{
-      flex-direction:column;
-      align-items:center;
-    }
+  .product-page {
+    flex-direction: column;
+    align-items: center;
   }
+}

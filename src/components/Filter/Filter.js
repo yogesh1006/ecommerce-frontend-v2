@@ -38,7 +38,6 @@ const Filter = () => {
         </Button>
         <legend>Sort By Price</legend>
         <div className="sort">
-          <br />
           <select
             className="sortSelect"
             value={state.filters.priceSort}
@@ -89,7 +88,7 @@ const Filter = () => {
 
       <div className="mobile-view">
         <Button variant="primary" onClick={handleShow} className="float-btn">
-          <i className="fas fa-filter fa-lg"></i>
+          <i className="fas fa-filter fa-lg" ></i>
         </Button>
 
         <Modal show={show} onHide={handleClose}>
@@ -121,7 +120,7 @@ const Filter = () => {
                         dispatch({ type: "SORT_BY_BRAND", payload: brand })
                       }
                     ></input>
-                    <label htmlFor="brand">{brand}</label>
+                    <label htmlFor="brand" > {brand}</label>
                   </div>
                 );
               })}

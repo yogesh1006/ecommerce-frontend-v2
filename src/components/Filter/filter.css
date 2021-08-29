@@ -6,6 +6,10 @@
   display: none;
 }
 
+.sort .sortSelect {
+  padding: 0.5rem;
+  outline: none;
+}
 @media only screen and (max-width: 768px) {
   .filters {
     display: none;
@@ -16,34 +20,40 @@
     display: block;
   }
   .float-btn {
-    width: 70px;
-    height: 70px;
-    z-index:1;
-    padding:0;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
     border-radius: 50%;
     box-shadow: 0 6px 10px 0 #666;
     transition: all 0.1s ease-in-out;
-    font-size: 50px;
     color: white;
-    text-align: center;
     justify-content: center;
-    line-height: 50px;
     position: fixed;
-    right: 40px;
-    bottom: 40px;
+    right: 20px;
+    bottom: 30px;
   }
 
-  .brands{
-      display:flex;
-      justify-content:flex-start;
-      flex-wrap:wrap;
-      gap:1rem;
+  .brands {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
-  .diff-sizes{
+  .diff-sizes {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .sort option {
+    background-color: orange;
+  }
+
+ .mobile-view i {
     display:flex;
-    justify-content:flex-start;
-    flex-wrap:wrap;
-    gap:1rem;
+    justify-content:center;
+    align-items:center;
   }
 }
