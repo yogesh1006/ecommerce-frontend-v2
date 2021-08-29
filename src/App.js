@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
@@ -30,7 +29,6 @@ function App() {
 
           <PrivateRoute path="/ushopweship/cart" component={Cart} />
           <PrivateRoute path="/ushopweship/wishlist" component={Wishlist} />
-\
           <Route path="/ushopweship/login" component={Signin} />
           <Route path="/ushopweship/signup" component={Signup} />
 

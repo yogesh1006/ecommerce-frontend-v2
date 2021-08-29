@@ -20,7 +20,7 @@
 
 * Reducer + Context
 * React Router
-* mongodb backend for both authentication and cart/wishlist 
+* mongodb backend for both authentication with JWT and cart/wishlist. 
 
 ### Upcoming features-
 

@@ -7,7 +7,6 @@ export function DataProvider({ children }) {
   const [state, dispatch] = useReducer(dataReducer, initialState);
 
   const filterData = (data) => {
-    console.log("", data);
     if (data) {
       let filteredData = [...data];
 

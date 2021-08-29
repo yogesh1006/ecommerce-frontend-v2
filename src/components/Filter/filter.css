@@ -1,0 +1,49 @@
+.filters {
+  width: 15%;
+}
+
+.mobile-view {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .filters {
+    display: none;
+    /* width:100%; */
+  }
+
+  .mobile-view {
+    display: block;
+  }
+  .float-btn {
+    width: 70px;
+    height: 70px;
+    z-index:1;
+    padding:0;
+    border-radius: 50%;
+    box-shadow: 0 6px 10px 0 #666;
+    transition: all 0.1s ease-in-out;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    line-height: 50px;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+  }
+
+  .brands{
+      display:flex;
+      justify-content:flex-start;
+      flex-wrap:wrap;
+      gap:1rem;
+  }
+
+  .diff-sizes{
+    display:flex;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:1rem;
+  }
+}

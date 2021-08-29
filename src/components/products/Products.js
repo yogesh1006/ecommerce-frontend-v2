@@ -3,7 +3,7 @@ import axios from "axios";
 import { Col, Row, Card, Button } from "react-bootstrap";
 import { API } from "../../backend";
 import { useData } from "../../context/dataContext";
-import Filter from "../Filter";
+import Filter from "../Filter/Filter";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
@@ -24,6 +24,11 @@ const Products = () => {
       });
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() =>{
+    dispatch({type:"CLEAR_FILTERS"})
+    // eslint-disable-next-line
+  },[])
 
   const addToWishlist = (product_id) => {
     if (authState.token) {
@@ -70,7 +75,7 @@ const Products = () => {
                   <Card.Img
                     variant="bottom"
                     src={product.image}
-                    style={{ height: "250px", backgroundSize: "cover" }}
+                    style={{ height: "250px", objectFit: "cover" }}
                   />
                 </Link>
                 <Card.Body
