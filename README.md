@@ -1,13 +1,29 @@
-# E-commerce App
+## U Shop We ship 
 
-### MERN stack App
+### Tech Stack -
 
-## Features
+* React
+* Express JS (https://github.com/yogesh1006/ecom-backend/tree/development)
+* Mongoose + MongoDB
 
-* login/signup with validation
-* Product listing page
-* Add / remove / increase / remove / move to wishlist - functionality for cart
-* Add / remove for wishlist
-* Product Description page with multiple images
-* Filter Products based on availabilty, shipping, category and price range
-* Sort Products based on price
+### Functionalities-
+
+* Cart
+* Wishlist
+* Filter and Sort
+* Search with brand or product name
+* Responsive design
+* Loader, Toast
+* Product detail page
+
+### React JS -
+
+* Reducer + Context
+* React Router
+* mongodb backend for both authentication and cart/wishlist 
+
+### Upcoming features-
+
+* User details edit section
+
+[Live Link](http://13.126.37.93:3000/ushopweship)

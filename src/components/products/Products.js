@@ -12,7 +12,7 @@ import "./products.css";
 const Products = () => {
   const { filteredData, dispatch } = useData();
   const { authState } = useAuth();
-   const history = useHistory();
+  const history = useHistory();
   useEffect(() => {
     axios
       .post(`${API}/auth/get_all_products`)
@@ -27,7 +27,6 @@ const Products = () => {
 
   const addToWishlist = (product_id) => {
     if (authState.token) {
-
       axios
         .post(
           `${API}/api/add_to_wishlist`,
@@ -53,12 +52,12 @@ const Products = () => {
           });
         });
     } else {
-      history.push("/ushopweship/login")
+      history.push("/ushopweship/login");
     }
   };
 
   return (
-    <div  className="product-page">
+    <div className="product-page">
       <Filter />
       <div style={{ width: "80%" }}>
         <Row>
@@ -82,14 +81,20 @@ const Products = () => {
                     alignItems: "stretch",
                   }}
                 >
-                  <Card.Title>{product.name}<span> <h6>{product.brand}</h6></span></Card.Title>
-                  <div style={{display:"flex",marginRight:"4px"}}>{product.size.map((size,index) => {
-                     return ( 
-                       <h5 key={index} style={{border:"1px solid black",padding:"4px",marginRight:"4px"}}>{size}</h5>
-                     )
-                  })}</div>
+                  <Card.Title>
+                    {product.name}
+                    <span>
+                      {" "}
+                      <h6>{product.brand}</h6>
+                    </span>
+                  </Card.Title>
+                  <Card.Text>Size : {product.size}</Card.Text>
                   <Card.Text as="h5">Rs.{product.price}</Card.Text>
-                  <Button style={{position:"relative",bottom:0}} onClick={() => addToWishlist(product._id)} block>
+                  <Button
+                    style={{ position: "relative", bottom: 0 }}
+                    onClick={() => addToWishlist(product._id)}
+                    block
+                  >
                     ADD TO WISHLIST
                   </Button>
                 </Card.Body>

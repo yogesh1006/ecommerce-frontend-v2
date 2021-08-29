@@ -1,12 +1,10 @@
-import axios from "axios";
-import React from "react";
 import { Button } from "react-bootstrap";
-import { API } from "../backend";
 import { useData } from "../context/dataContext";
 import "./filter.css";
 
 const Filter = () => {
   const { state,dispatch } = useData();
+  console.log(state);
   const brands = [
     "Reebok",
     "Jack & Jones",
@@ -19,45 +17,30 @@ const Filter = () => {
   ]
   const sizes = ["8","9","10"];
 
-  const filteredDataHighToLow = () => {
-    axios
-      .post(`${API}/auth/get_all_products`, {
-        order: "-1",
-        column: "price",
-        // brand:["reebok","puma"],
-        // size:["8"],
-        // filter:true
-      })
-      .then((res) => {
-        dispatch({ type: "SET_PRODUCTLIST", payload: res.data.data });
-      });
+  const sortHandler = (e) => {
+    if (e.target.value === "low_to_high") {
+      dispatch({ type: "PRICE_LOW_TO_HIGH", payload: e.target.value });
+    } else {
+      dispatch({ type: "PRICE_HIGH_TO_LOW", payload: e.target.value });
+    }
   };
-
-  const filteredDataLowToHigh = () => {
-    axios
-      .post(`${API}/auth/get_all_products`, {
-        order: "1",
-        column: "price",
-      })
-      .then((res) => {
-        dispatch({ type: "SET_PRODUCTLIST", payload: res.data.data });
-      });
-  };
-
-
 
 
   return (
     <div  className="filters">
         <Button onClick={() => dispatch({ type: "CLEAR_FILTERS" })}>Clear All</Button>
         <legend>Sort By Price</legend>
-        <div>
-          <input type="radio" name="sort" onChange={filteredDataHighToLow} />
-          <label> Price: High To Low</label>
-          <br />
-          <input type="radio" name="sort" onChange={filteredDataLowToHigh} />
-          <label> Price: Low To High</label>
-        </div>
+        <div className="sort">
+        <br />
+        <select
+          className="sortSelect"
+          value={state.filters.priceSort}
+          onChange={(e) => sortHandler(e)}
+        >
+          <option value="high_to_low">Price: High to Low</option>
+          <option value="low_to_high">Price: Low to High</option>
+        </select>
+      </div>
         <legend>Filter By Brand</legend>
         <div>
         {brands.map((brand) => {

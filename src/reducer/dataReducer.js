@@ -3,15 +3,16 @@ export const initialState = {
   cart: [],
   wishlist: [],
   filters: {
+    priceSort: "",
     sortByBrand: [
       "Reebok",
-    "Jack & Jones",
-    "Adidas",
-    "Levi's",
-    "Nike",
-    "Puma",
-    "Campus",
-    "Layasa"
+      "Jack & Jones",
+      "Adidas",
+      "Levi's",
+      "Nike",
+      "Puma",
+      "Campus",
+      "Layasa",
     ],
     sortBySize: ["8", "9", "10"],
   },
@@ -68,7 +69,23 @@ export function dataReducer(state, action) {
             : item;
         }),
       };
+    case "PRICE_HIGH_TO_LOW":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          priceSort: action.payload,
+        },
+      };
 
+    case "PRICE_LOW_TO_HIGH":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          priceSort: action.payload,
+        },
+      };
     case "SORT_BY_BRAND":
       return state.filters.sortByBrand.includes(action.payload)
         ? {
@@ -88,29 +105,30 @@ export function dataReducer(state, action) {
             },
           };
 
-          case "SORT_BY_SIZES":
-            return state.filters.sortBySize.includes(action.payload)
-              ? {
-                  ...state,
-                  filters: {
-                    ...state.filters,
-                    sortBySize: state.filters.sortBySize.filter(
-                      (size) => size !== action.payload
-                    )
-                  }
-                }
-              : {
-                  ...state,
-                  filters: {
-                    ...state.filters,
-                    sortBySize: state.filters.sortBySize.concat(action.payload)
-                  }
-                };      
+    case "SORT_BY_SIZES":
+      return state.filters.sortBySize.includes(action.payload)
+        ? {
+            ...state,
+            filters: {
+              ...state.filters,
+              sortBySize: state.filters.sortBySize.filter(
+                (size) => size !== action.payload
+              ),
+            },
+          }
+        : {
+            ...state,
+            filters: {
+              ...state.filters,
+              sortBySize: state.filters.sortBySize.concat(action.payload),
+            },
+          };
 
     case "CLEAR_FILTERS":
       return {
         ...state,
         filters: {
+          priceSort: "",
           sortByBrand: [],
           sortBySize: [],
         },
