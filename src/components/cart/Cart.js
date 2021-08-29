@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const { authState } = useAuth();
   const { state, dispatch } = useData();
-  console.log(state);
   
   const getCartData = () => {
     axios
@@ -22,7 +21,6 @@ const Cart = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         dispatch({ type: "SET_USER_CART", payload: res.data.data.products });
       })
       .catch((err) => console.log(err));

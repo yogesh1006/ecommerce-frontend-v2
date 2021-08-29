@@ -4,9 +4,12 @@ import { Link, NavLink, useRouteMatch } from "react-router-dom";
 import SearchBox from "../SearchBox";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
+import { useData } from "../../context/dataContext";
 
 const Header = () => {
   const { authState, authDispatch } = useAuth();
+  const { state } = useData();
+  console.log(state);
   let match = useRouteMatch("/ushopweship/home");
 
   const logoutHandler = () => {
@@ -33,7 +36,9 @@ const Header = () => {
             activeClassName="active"
             to="/ushopweship/cart"
           >
-            <i className="fas fa-shopping-cart"></i> Cart
+            <i className="fas fa-shopping-cart"></i>
+            Cart
+            <span style={{color:"white"}}> ({state.cart.length >= 1 ? state.cart.length : null})</span>
           </NavLink>
 
           <NavLink
@@ -42,6 +47,8 @@ const Header = () => {
             to="/ushopweship/wishlist"
           >
             <i className="fas fa-heart"></i> Wishlist
+            <span style={{color:"white"}}> ({state.wishlist.length >= 1 ? state.wishlist.length : null})</span>
+
           </NavLink>
 
           {authState.token ? (

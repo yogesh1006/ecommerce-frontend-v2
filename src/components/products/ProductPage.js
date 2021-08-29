@@ -10,7 +10,6 @@ function ProductPage() {
   const { product_id } = useParams();
   const [product, setproduct] = useState({});
   const { authState } = useAuth();
-  console.log(authState);
   const history = useHistory();
 
   useEffect(() => {
@@ -69,7 +68,6 @@ function ProductPage() {
           }
         )
         .then((res) => {
-          console.log(res);
           toast.success(res.data.message, {
             position: toast.POSITION.TOP_RIGHT,
           });

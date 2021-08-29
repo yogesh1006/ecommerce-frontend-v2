@@ -44,7 +44,6 @@ const Wishlist = () => {
         }
       )
       .then((res) => {
-        console.log(res);
         getWishlistData();
         toast.success(res.data.message, {
           position: toast.POSITION.TOP_RIGHT,
@@ -72,7 +71,6 @@ const Wishlist = () => {
         });
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err.response.data.message, {
           position: toast.POSITION.TOP_RIGHT,
         });

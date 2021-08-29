@@ -9,8 +9,6 @@ import "./cart.css";
 const CartItem = ({ product, getCartData }) => {
   const { authState } = useAuth();
   const { dispatch } = useData();
-  console.log(product);
-
 
   const removeFromCart = (id) => {
     axios
@@ -52,7 +50,6 @@ const CartItem = ({ product, getCartData }) => {
         }
       )
       .then((res) => {
-        console.log(res);
         removeFromCart(product_id);
         getCartData();
         toast.success(res.data.message, {
@@ -60,7 +57,6 @@ const CartItem = ({ product, getCartData }) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err.response.data.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
