@@ -38,7 +38,7 @@ const Header = () => {
           >
             <i className="fas fa-shopping-cart"></i>
             Cart
-            <span style={{color:"white"}}> ({state.cart.length >= 1 ? state.cart.length : null})</span>
+            <span style={{color:"white"}}> ({state.cart.length >= 1 ? state.cart.length : 0})</span>
           </NavLink>
 
           <NavLink
@@ -47,7 +47,7 @@ const Header = () => {
             to="/ushopweship/wishlist"
           >
             <i className="fas fa-heart"></i> Wishlist
-            <span style={{color:"white"}}> ({state.wishlist.length >= 1 ? state.wishlist.length : null})</span>
+            <span style={{color:"white"}}> ({state.wishlist.length >= 1 ? state.wishlist.length : 0})</span>
 
           </NavLink>
 
