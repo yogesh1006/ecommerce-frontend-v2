@@ -32,7 +32,7 @@ const PriceSummary = () => {
           },
         }
       );
-      if (data.data.message === "success") {
+      if (data.data.status === "success") {
         history.push("/paymentsuccess");
       }
     } catch (error) {
