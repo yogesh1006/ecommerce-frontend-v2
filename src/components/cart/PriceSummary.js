@@ -19,11 +19,9 @@ const PriceSummary = () => {
   };
 
   const checkout = async (token) => {
-    console.log(token);
-
     try {
       const data = await axios.post(
-        `http://${API}/api/payment`,
+        `${API}/api/payment`,
         {
           token: token,
           amount: getAmount(cart),
