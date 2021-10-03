@@ -102,7 +102,7 @@ function ProductPage() {
                     <h5>{product.name}</h5>
                   </ListGroup.Item>
 
-                  <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                  <ListGroup.Item>Price: Rs. {product.price}</ListGroup.Item>
                   <ListGroup.Item>
                     Description: {product.description}
                   </ListGroup.Item>

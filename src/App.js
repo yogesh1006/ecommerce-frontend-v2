@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProductPage from "./components/products/ProductPage";
 import Wishlist from "./components/wishlist/Wishlist";
 import Banner from "./components/Banner/Banner";
+import PaymentSuccess from "./components/cart/PaymentSuccess";
 
 function App() {
  
@@ -29,6 +30,7 @@ function App() {
 
           <PrivateRoute path="/ushopweship/cart" component={Cart} />
           <PrivateRoute path="/ushopweship/wishlist" component={Wishlist} />
+          <PrivateRoute path="/paymentsuccess" component={PaymentSuccess}/>
           <Route path="/ushopweship/login" component={Signin} />
           <Route path="/ushopweship/signup" component={Signup} />
 

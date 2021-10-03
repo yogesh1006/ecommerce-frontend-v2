@@ -34,6 +34,7 @@ const Signin = () => {
           let data = response.data.data;
           if (data.token) {
             localStorage.setItem("jwt", JSON.stringify(data.token));
+            localStorage.setItem("user",JSON.stringify(data.email))
           }
           authDispatch({ type: "SET_USER_LOGIN", payload: data.token });
           toast.success(response.data.message, {
