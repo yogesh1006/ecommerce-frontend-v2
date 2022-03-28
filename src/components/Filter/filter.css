@@ -1,0 +1,59 @@
+.filters {
+  width: 15%;
+}
+
+.mobile-view {
+  display: none;
+}
+
+.sort .sortSelect {
+  padding: 0.5rem;
+  outline: none;
+}
+@media only screen and (max-width: 768px) {
+  .filters {
+    display: none;
+    /* width:100%; */
+  }
+
+  .mobile-view {
+    display: block;
+  }
+  .float-btn {
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+    border-radius: 50%;
+    box-shadow: 0 6px 10px 0 #666;
+    transition: all 0.1s ease-in-out;
+    color: white;
+    justify-content: center;
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+  }
+
+  .brands {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .diff-sizes {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .sort option {
+    background-color: orange;
+  }
+
+ .mobile-view i {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+}
